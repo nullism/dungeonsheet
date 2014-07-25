@@ -8,6 +8,15 @@ DNDApp.controller('StatsController', function($scope, $http) {
           $scope.stats.spells.predicate = 'level';
     });
 
+    $scope.save = function() { 
+        var jstats = $("#stats_json").text();
+        //console.log('Saving data...');
+        //console.log(jstats);
+        $http.post('/stats.json/save', {"stats":jstats}).then(function(res) {
+            $("#info_text").html("Saved!");
+        });
+    }
+
     $scope.sortSkills = function(how) {       
         $scope.stats.skills.predicate = how;
     }
@@ -22,12 +31,7 @@ DNDApp.controller('StatsController', function($scope, $http) {
         });
     }
 
-    $scope.save = function() { 
-        var jstats = $("#stats_json").text();
-        //console.log('Saving data...');
-        //console.log(jstats);
-        $http.post('/stats.json/save', {"stats":jstats});
-    }
+
 
     $scope.addAttack = function() { 
         if(!$scope.stats) { return 0; }

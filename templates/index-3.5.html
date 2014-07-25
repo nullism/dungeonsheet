@@ -95,7 +95,8 @@ $(document).ready(function() {
         showTab('sec_character');
     }
     scope = angular.element($("#StatsController")).scope();
-    $("input[type=text]").change(function() { 
+    $("input[type=text]").change(function() {
+        $("#info_text").html('Saving...'); 
         scope.save();
     });
 });
@@ -181,7 +182,17 @@ $(document).ready(function() {
     <div style="clear: both;"></div>
     <div class="form-group">
         <label>Alignment</label>
-        <input type="text" value="{{ stats.alignment }}" ng-model="stats.alignment" class="form-control input-text">
+        <select ng-model="stats.alignment" class="form-control">
+            <option value="Lawful Good">Lawful Good</option>
+            <option value="Lawful Neutral">Lawful Neutral</option>
+            <option value="Lawful Evil">Lawful Evil</option>
+            <option value="Neutral Good">Neutral Good</option>
+            <option value="Neutral">Neutral</option>
+            <option value="Neutral Evil">Neutral Evil</option>
+            <option value="Chaotic Good">Chaotic Good</option>
+            <option value="Chaotic Neutral">Chaotic Neutral</option>
+            <option value="Chaotic Evil">Chaotic Evil</option>
+        </select>
     </div>
     <div class="form-group">
         <label>Deity</label>
@@ -194,10 +205,15 @@ $(document).ready(function() {
     <div class="form-group">
         <label>Size</label>
         <select ng-model="stats.size" class="form-control">
+            <option value="Fine">Fine</option>
+            <option value="Diminutive">Diminutive</option>
             <option value="Tiny">Tiny</option>
             <option value="Small">Small</option>
             <option value="Medium">Medium</option>
             <option value="Large">Large</option>
+            <option value="Huge">Huge</option>
+            <option value="Gargantuan">Gargantuan</option>
+            <option value="Colossal">Colossal</option>
         </select> 
     </div>
     <div class="form-group">    
@@ -777,7 +793,8 @@ $(document).ready(function() {
 
 </div><!-- end sec_spells -->
 
-<p class="text-muted text-center">A simple D&amp;D 3.5 character sheet licensed under MIT. Created by Aaron Meier.</p>
+<p class="text-muted text-center">A simple D&amp;D 3.5 character sheet licensed under MIT. Created by Aaron Meier. 
+    Get the <a href="https://github.com/webgovernor/dungeonsheet" target="_blank">source code</a>.</p>
 
 <script>
 
