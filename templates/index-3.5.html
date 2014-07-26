@@ -35,6 +35,9 @@
     .input-int { 
         max-width: 50px;
     }
+    .input-int-md { 
+        max-width: 70px;
+    }
     .input-int-lg {
         max-width: 100px;
     }
@@ -73,6 +76,13 @@
 var character_key = "{{character_key}}";
 var scope = null; 
 
+function updateChangeFields() {
+    $("input[type=text]").change(function() {
+        $("#info_text").html('Saving...'); 
+        scope.save();
+    });
+}
+
 function showTab(tid) {
     $(".section").hide();
     $("#"+tid).show('fast');
@@ -88,17 +98,14 @@ function calculator() {
     }
 }
 $(document).ready(function() {
+    scope = angular.element($("#StatsController")).scope();
     if(character_key.length < 1) {
         showTab('sec_character_key');
         $("#section_nav").hide();
     } else { 
         showTab('sec_character');
     }
-    scope = angular.element($("#StatsController")).scope();
-    $("input[type=text]").change(function() {
-        $("#info_text").html('Saving...'); 
-        scope.save();
-    });
+    var changeTimer = setInterval('updateChangeFields()', 5000);   
 });
 </script>
 
@@ -603,11 +610,11 @@ $(document).ready(function() {
 
         <div class="form-group">
             <label>Quantity</label>
-            <input type="text" ng-model="item.quantity" value="{{item.quantity}}" class="form-control input-int" maxlength="3">
+            <input type="text" ng-model="item.quantity" value="{{item.quantity}}" class="form-control input-int-md" maxlength="5">
         </div>
 
         <div class="form-group">
-            <button ng-click="removeItem($index)" class="btn btn-danger">&times;</button>
+            <button ng-click="removeItem(item)" class="btn btn-danger">&times;</button>
         </div>
         <div style="clear: both;"></div>
     </div>

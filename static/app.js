@@ -32,7 +32,6 @@ DNDApp.controller('StatsController', function($scope, $http) {
     }
 
 
-
     $scope.addAttack = function() { 
         if(!$scope.stats) { return 0; }
         $scope.stats.attacks.push({"damage":"1d3"});
@@ -43,6 +42,7 @@ DNDApp.controller('StatsController', function($scope, $http) {
         var okay = confirm("Are you sure?");
         if(!okay) { return 0; }
         $scope.stats.attacks.splice(idx, 1);
+        $scope.save();
     }
 
 
@@ -51,11 +51,19 @@ DNDApp.controller('StatsController', function($scope, $http) {
         $scope.stats.items.push({"weight":0, "quantity":1});
     }
 
-    $scope.removeItem = function(idx) { 
+    $scope.removeItem = function(item) { 
         if(!$scope.stats) { return 0; }
         var okay = confirm("Are you sure?");
         if(!okay) { return 0; }
-        $scope.stats.items.splice(idx, 1);
+        for(var i=0; i<$scope.stats.items.length; i++) {
+            var sp = $scope.stats.items[i];
+            if((sp.name == item.name)&&(sp.quantity == item.quantity)) { 
+                $scope.stats.items.splice(i, 1);
+                $scope.save();
+                break;
+            }
+        }
+
     }
 
     $scope.addFeat = function() { 
@@ -68,6 +76,7 @@ DNDApp.controller('StatsController', function($scope, $http) {
         var okay = confirm("Are you sure?");
         if(!okay) { return 0; }
         $scope.stats.feats.splice(idx, 1);
+        $scope.save();
     }
 
     $scope.addLanguage = function() { 
@@ -80,6 +89,7 @@ DNDApp.controller('StatsController', function($scope, $http) {
         var okay = confirm("Are you sure?");
         if(!okay) { return 0; }
         $scope.stats.languages.splice(idx, 1);
+        $scope.save();
     }
 
     $scope.addSpecialAbility = function() { 
@@ -92,6 +102,7 @@ DNDApp.controller('StatsController', function($scope, $http) {
         var okay = confirm("Are you sure?");
         if(!okay) { return 0; }
         $scope.stats.special_abilities.splice(idx, 1);
+        $scope.save();
     }
 
     $scope.addSpell = function() { 
@@ -107,11 +118,11 @@ DNDApp.controller('StatsController', function($scope, $http) {
             var sp = $scope.stats.spells[i];
             if(sp.name == spell_name) { 
                 $scope.stats.spells.splice(i, 1);
+                $scope.save();
                 break;
             }
         }
     }
-
 
 
     $scope.getAbilityMod = function(stat) {
