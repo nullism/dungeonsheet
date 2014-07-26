@@ -2,11 +2,12 @@ var DNDApp = angular.module('DNDApp', []);
  
 DNDApp.controller('StatsController', function($scope, $http) {
 
-    $http.get('/stats.json')
+    $scope.load = function() { $http.get('/stats.json')
        .then(function(res){
           $scope.stats = res.data; 
           $scope.stats.spells.predicate = 'level';
-    });
+          $scope.stats.items.predicate = '-is_worn';
+    })};
 
     $scope.save = function() { 
         var jstats = $("#stats_json").text();
@@ -15,6 +16,24 @@ DNDApp.controller('StatsController', function($scope, $http) {
         $http.post('/stats.json/save', {"stats":jstats}).then(function(res) {
             $("#info_text").html("Saved!");
         });
+    }
+
+    $scope.dynamicSort = function(property) {
+        var sortOrder = 1;
+        if(property[0] === "-") {
+            sortOrder = -1;
+            property = property.substr(1);
+        }
+        return function (a,b) {
+            var result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
+            return result * sortOrder;
+        }
+    }
+
+    $scope.sortItems = function(how) {
+        console.log("Sorting items...");
+        $scope.stats.items.sort(how);
+        console.log($scope.stats.items);
     }
 
     $scope.sortSkills = function(how) {       
@@ -48,7 +67,7 @@ DNDApp.controller('StatsController', function($scope, $http) {
 
     $scope.addItem = function() { 
         if(!$scope.stats) { return 0; }
-        $scope.stats.items.push({"weight":0, "quantity":1});
+        $scope.stats.items.push({"weight":0, "quantity":1, "is_worn":false});
     }
 
     $scope.removeItem = function(item) { 
