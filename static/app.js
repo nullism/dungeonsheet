@@ -125,13 +125,17 @@ DNDApp.controller('StatsController', function($scope, $http) {
     }
 
 
+    $scope.getGrappleMod = function() { 
+        if(!$scope.stats) { return 0; }
+        return parseInt($scope.stats.base_attack_bonus)
+            + parseInt($scope.stats.grapple.size_mod)
+            + $scope.getAbilityMod($scope.stats.abilities[0].value)
+            + parseInt($scope.stats.grapple.misc_mod);
+    }
+
     $scope.getAbilityMod = function(stat) {
         var statmod = stat - 10;
-        if(statmod > 0) { 
-            return Math.floor(statmod / 2);
-        }  
-            
-        return Math.ceil(statmod / 2);
+        return Math.floor(statmod / 2);
     };
 
     $scope.getFortitude = function() { 
@@ -208,7 +212,7 @@ DNDApp.controller('StatsController', function($scope, $http) {
         var totalWeight = 0;
         for(var i=0; i<$scope.stats.items.length; i++) { 
             var item = $scope.stats.items[i];
-            totalWeight += parseInt(item.weight) * parseInt(item.quantity);
+            totalWeight += parseFloat(item.weight) * parseInt(item.quantity);
         }
         return totalWeight;
     }

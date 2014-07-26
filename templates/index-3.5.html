@@ -452,7 +452,31 @@ $(document).ready(function() {
 
   </form>
 
-  
+  <h3>Grapple</h3>
+  <form role="form">
+    <div class="form-group">
+        <label>Grapple =</label>
+        <input type="text" value="{{ getGrappleMod() }}" class="form-control input-int" readonly>
+    </div>
+    <div class="form-group">
+        <label>Base Attack Bonus + </label>
+        <input type="text" value="{{ stats.base_attack_bonus }}" class="form-control input-int" ng-model="stats.base_attack_bonus" maxlength="3">
+    </div>
+    <div class="form-group">
+        <label>STR Mod + </label>
+        <input type="text" value="{{ getAbilityMod(stats.abilities[0].value) }}" class="form-control input-int" readonly>
+    </div>
+    <div class="form-group">
+        <label>Size Mod + </label>
+        <input type="text" value="{{ stats.grapple.size_mod }}" ng-model="stats.grapple.size_mod" class="form-control input-int" maxlength="3">
+    </div>
+    <div class="form-group">
+        <label>Misc Mod</label>
+        <input type="text" value="{{ stats.grapple.misc_mod }}" ng-model="stats.grapple.misc_mod" class="form-control input-int" maxlength="3">
+    </div>
+    <div style="clear: both;"></div>
+  </form> 
+ 
   <h3>Attacks</h3>
   <form role="form">
 
@@ -623,7 +647,7 @@ $(document).ready(function() {
     </div>
     <div class="form-group">
         <label>Total Item Weight</label>
-        <input type="text" value="{{getItemWeightTotal()}}" class="form-control input-int" maxlength="3" readonly>
+        <input type="text" value="{{getItemWeightTotal()}}" class="form-control input-int-md" maxlength="6" readonly>
     </div>
     <div style="clear: both;"></div>
   </form>

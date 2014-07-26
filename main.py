@@ -89,6 +89,7 @@ def get_defaults():
         "level":1,
         "speed":6,
         "exp":0,
+        "base_attack_bonus":0,
         "size":"Medium",
         "gender":"Male",
         "eyes":"",
@@ -110,6 +111,12 @@ def get_defaults():
         "misc_ac_mod": 0,      
         "nonlethal_damage": 0,
         "damage_reduction": 0, 
+
+        # Grapple
+        "grapple": { 
+            "size_mod":0,
+            "misc_mod":0,
+        },
 
         # Saving throws
         "base_fort_save": 0,
