@@ -6,7 +6,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.16/angular.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-<!--    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script> -->
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script> 
     <script src="/static/app.js"></script>
 
 <style type="text/css">
@@ -78,6 +78,10 @@ var scope = null;
 
 function updateChangeFields() {
     $("input[type=text]").change(function() {
+        $("#info_text").html('Saving...'); 
+        scope.save();
+    });
+    $("textarea").change(function() {
         $("#info_text").html('Saving...'); 
         scope.save();
     });
@@ -165,7 +169,7 @@ $(document).ready(function() {
 <div id="sec_character" class="section">
 
   <h2>Character:</h2>
-    <input type="text" value="{{ stats.character_name }}" ng-model="stats.character_name" 
+    <input type="text" ng-model="stats.character_name" 
         class="form-control input-text-lg">
     <div style="clear: both;"></div>
 
@@ -173,19 +177,19 @@ $(document).ready(function() {
   <form role="form" class="">
     <div class="form-group">
         <label>Class</label>
-        <input type="text" value="{{ stats.class }}" ng-model="stats.class" class="form-control input-text">
+        <input type="text" ng-model="stats.class" class="form-control input-text">
     </div>
     <div class="form-group">
         <label>Level</label>
-        <input type="text" value="{{ stats.level }}" ng-model="stats.level" class="form-control input-int" maxlength="2">
+        <input type="text" ng-model="stats.level" class="form-control input-int" maxlength="2">
     </div>
     <div class="form-group">
         <label>EXP</label>
-        <input type="text" value="{{ stats.exp }}" ng-model="stats.exp" class="form-control input-int-lg" maxlength="10">
+        <input type="text" ng-model="stats.exp" class="form-control input-int-lg" maxlength="10">
     </div>
     <div class="form-group">
         <label>Race</label>
-        <input type="text" value="{{ stats.race }}" ng-model="stats.race" class="form-control input-text-lg">
+        <input type="text" ng-model="stats.race" class="form-control input-text-lg">
     </div>
     <div style="clear: both;"></div>
     <div class="form-group">
@@ -204,7 +208,7 @@ $(document).ready(function() {
     </div>
     <div class="form-group">
         <label>Deity</label>
-        <input type="text" value="{{ stats.deity }}" ng-model="stats.deity" class="form-control input-text">
+        <input type="text" ng-model="stats.deity" class="form-control input-text">
     </div>
     <div style="clear: both;"></div>
   </form>
@@ -226,7 +230,7 @@ $(document).ready(function() {
     </div>
     <div class="form-group">    
         <label>Age</label>
-        <input type="text" value="{{ stats.age }}" class="form-control input-int" ng-model="stats.age" maxlength="3"> 
+        <input type="text" class="form-control input-int" ng-model="stats.age" maxlength="3"> 
     </div>
     <div class="form-group">   
         <label>Gender</label>
@@ -240,25 +244,25 @@ $(document).ready(function() {
 
     <div class="form-group">
         <label>Height</label>
-        <input type="text" value="{{ stats.height }}" ng-model="stats.height" class="form-control input-text-sm" >
+        <input type="text" ng-model="stats.height" class="form-control input-text-sm" >
     </div>
     <div class="form-group">
         <label>Weight</label>
-        <input type="text" value="{{ stats.weight }}" ng-model="stats.weight" class="form-control input-int" maxlength="3">
+        <input type="text" ng-model="stats.weight" class="form-control input-int" maxlength="3">
     </div>
     <div style="clear: both;"></div>
 
     <div class="form-group">
         <label>Eyes</label>
-        <input type="text" value="{{ stats.eyes }}" ng-model="stats.eyes" class="form-control input-text">
+        <input type="text" ng-model="stats.eyes" class="form-control input-text">
     </div>
     <div class="form-group">
         <label>Hair</label>
-        <input type="text" value="{{ stats.hair }}" ng-model="stats.hair" class="form-control input-text">
+        <input type="text" ng-model="stats.hair" class="form-control input-text">
     </div>
     <div class="form-group">
         <label>Skin</label>
-        <input type="text" value="{{ stats.skin }}" ng-model="stats.skin" class="form-control input-text">
+        <input type="text" ng-model="stats.skin" class="form-control input-text">
     </div>
 
 
@@ -274,7 +278,7 @@ $(document).ready(function() {
     <div ng-repeat="ability in stats.abilities">
         <div class="form-group">
             <label>{{ability.name}}</label>
-            <input type="text" value="{{ ability.value }}" ng-model="ability.value" class="form-control input-int" maxlength="2">
+            <input type="text" ng-model="ability.value" class="form-control input-int" maxlength="2">
         </div>
         <div class="form-group">
             <label>Mod</label>
@@ -488,15 +492,15 @@ $(document).ready(function() {
       </div>
       <div class="form-group">
         <label>Attack Bonus</label>
-        <input type="text" value="{{attack.bonus}}" ng-model="attack.bonus" class="form-control input-text-sm" maxlength="6">
+        <input type="text" value="{{attack.bonus}}" ng-model="attack.bonus" class="form-control input-text" maxlength="20">
       </div>
       <div class="form-group">
         <label>Damage</label>
-        <input type="text" value="{{attack.damage}}" ng-model="attack.damage" class="form-control input-text-sm" maxlength="6">
+        <input type="text" value="{{attack.damage}}" ng-model="attack.damage" class="form-control input-text-lg" maxlength="20">
       </div>
       <div class="form-group">
         <label>Critical</label>
-        <input type="text" value="{{attack.critical}}" ng-model="attack.critical" class="form-control input-text-sm" maxlength="6">
+        <input type="text" value="{{attack.critical}}" ng-model="attack.critical" class="form-control input-text" maxlength="20">
       </div>
       <div class="form-group">
         <label>Range</label>
@@ -662,9 +666,12 @@ $(document).ready(function() {
 
   <h3>Feats</h3>
   <form role="form">
-    <div ng-repeat="feat in stats.feats">
+    <div ng-repeat="feat in stats.feats" class="row-section">
         <div class="form-group">
             <input type="text" ng-model="feat.name" value="{{feat.name}}" class="form-control input-text-lg">
+        </div>
+        <div class="form-group"> 
+            <textarea id="feats_{{$index}}" ng-model="feat.notes" class="form-control"></textarea>
         </div>
         <button class="btn btn-danger" ng-click="removeFeat($index)">&times;</button>
         <div style="clear: both;"></div>
@@ -694,9 +701,12 @@ $(document).ready(function() {
   <div class="col-sm-4">
   <h3>Spec. ABL</h3>
   <form role="form">
-    <div ng-repeat="ability in stats.special_abilities">
+    <div ng-repeat="ability in stats.special_abilities" class="row-section">
         <div class="form-group">
-            <input type="text" ng-model="ability.name" value="{{ability.name}}" class="form-control input-text-lg">
+            <input type="text" ng-model="ability.name" class="form-control input-text-lg">
+        </div>
+        <div class="form-group">
+            <textarea ng-model="ability.notes" class="form-control"></textarea>
         </div>
         <button class="btn btn-danger" ng-click="removeSpecialAbility($index)">&times;</button>
         <div style="clear: both;"></div>
@@ -717,13 +727,11 @@ $(document).ready(function() {
   <form role="form">
     <div class="form-group">
         <label>Spell Save</label>
-        <input type="text" ng-model="stats.spell_save" value="{{stats.spell_save}}" 
-            class="form-control input-int" maxlength="3">
+        <input type="text" ng-model="stats.spell_save" class="form-control input-int" maxlength="3">
     </div>
     <div class="form-group">
         <label>Arc. Spell Failure %</label>
-        <input type="text" ng-model="stats.arcane_spell_failure" value="{{stats.arcane_spell_failure}}" 
-            class="form-control input-int" maxlength="3">
+        <input type="text" ng-model="stats.arcane_spell_failure" class="form-control input-int" maxlength="3">
     </div>
     <div class="form-group">
         <label>Conditional Mods</label>
@@ -777,7 +785,7 @@ $(document).ready(function() {
         </div>
         <div class="form-group">
             <label>Spell</label>
-            <input type="text" ng-model="spell.name" class="form-control input-text-lg" value="{{spell.name}}">
+            <input type="text" ng-model="spell.name" class="form-control input-text-lg">
         </div>
         <div class="form-group">
             <label>Notes</label>
@@ -799,12 +807,12 @@ $(document).ready(function() {
   <div ng-repeat="level in stats.spell_levels">
     <div class="form-group">
         <label>Spells Known</label>
-        <input type="text" class="form-control input-int" ng-model="level.number_known" value="{{level.number_known}}" maxlength="3">
+        <input type="text" class="form-control input-int" ng-model="level.number_known" maxlength="3">
     </div>
 
     <div class="form-group">
         <label>Save DC</label>
-        <input type="text" class="form-control input-int" ng-model="level.save_dc" value="{{level.save_dc}}" maxlength="3">
+        <input type="text" class="form-control input-int" ng-model="level.save_dc" maxlength="3">
     </div>
     <div class="form-group">
         <label>Level</label>
@@ -813,11 +821,11 @@ $(document).ready(function() {
 
     <div class="form-group">
         <label>Per Day</label>
-        <input type="text" class="form-control input-int" ng-model="level.per_day" value="{{level.per_day}}" maxlength="3">
+        <input type="text" class="form-control input-int" ng-model="level.per_day" maxlength="3">
     </div>
     <div class="form-group">
         <label>Bonus Spells</label>
-        <input type="text" class="form-control input-int" ng-model="level.bonus" value="{{level.bonus}}" maxlength="3">
+        <input type="text" class="form-control input-int" ng-model="level.bonus" maxlength="3">
     </div>
     <div style="clear: both;"></div>
   </div>
